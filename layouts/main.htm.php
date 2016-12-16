@@ -25,7 +25,7 @@
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Usuários</a></li>
+                        <li class="active"><a href="<?php echo Mapper::url('/'); ?>">Usuários</a></li>
                         <li><a href="#">Salas</a></li>
                         <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administrar <span class="caret"></span></a>
