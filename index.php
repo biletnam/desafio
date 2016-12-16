@@ -12,5 +12,7 @@ require ROOT.'/models/app_model.php';
 require ROOT.'/controllers/app_controller.php';
 require ROOT.'/controllers/home_controller.php';
 
+session_start();
+
 $HomeController = new HomeController();
 $HomeController->run();

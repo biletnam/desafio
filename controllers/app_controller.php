@@ -14,8 +14,6 @@ Class AppController extends Object {
 
 
     public function run(){
-        $this->filter();
-
         $controller_name = (!empty($this->get['controller']) ? $this->get['controller'] : 'home') . '_controller';
         $controller = Inflector::camelize($controller_name);
         $this->action = !empty($this->get['action']) ? $this->get['action'] : 'index';
@@ -28,7 +26,7 @@ Class AppController extends Object {
             require_once $filename_controller;
             $Controller = new $controller($this->get, $this->post);
             $Controller->action($this->action);
-            $Controller->filter();
+            $Controller->beforeAction();
             $Controller->{$this->action}();
             $Controller->render();
         }
@@ -37,7 +35,12 @@ Class AppController extends Object {
     /**
      * Permissão de acessos.
      */
-    public function filter(){
+    public function beforeAction(){
+        $this->loadModel('LoginModel', 'login_model');
+        if(!$this->LoginModel->loggedIn() && !Mapper::match('/home/login')){
+            $this->LoginModel->previousAction(Mapper::here());
+            $this->redirect('/home/login');
+        }
     }
 
     /**
