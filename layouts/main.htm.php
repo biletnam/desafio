@@ -27,7 +27,7 @@
                     <ul class="nav navbar-nav">
                         <li class="<?php echo $get['controller'] == 'home'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/'); ?>">Home</a></li>
                         <li class="<?php echo $get['controller'] == 'usuarios'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/usuarios'); ?>">Usuários</a></li>
-                        <li><a href="#">Salas</a></li>
+                        <li class="<?php echo $get['controller'] == 'salas'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/salas'); ?>">Salas</a></li>
                         <!-- <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administrar <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
