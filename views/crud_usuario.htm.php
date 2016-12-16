@@ -15,3 +15,5 @@ if(!empty($usuario)){
     <input type="password" name="passwd" placeholder="Informe sua senha" />
     <input type="submit" value="Salvar" />
 </form>
+
+<a href="<?php echo Mapper::url('/home'); ?>" class="btn btn-default">Voltar</a>
