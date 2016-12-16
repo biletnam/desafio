@@ -50,7 +50,7 @@ if(!empty($sala)){
         </div>
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                <a href="<?php echo Mapper::url('/home'); ?>" class="btn btn-default">Voltar</a>
+                <a href="<?php echo Mapper::url('/salas'); ?>" class="btn btn-default">Voltar</a>
                 <input type="submit" class="btn btn-primary" value="Salvar">
             </div>
         </div>
