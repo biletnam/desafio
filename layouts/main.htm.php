@@ -2,11 +2,11 @@
     <head>
         <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/superhero/bootstrap.min.css" rel="stylesheet" integrity="sha384-Xqcy5ttufkC3rBa8EdiAyA1VgOGrmel2Y+wxm4K3kI3fcjTWlDWrlnxyD6hOi3PF" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-        <link href="public/css/main.css" rel="stylesheet">
+        <link href="<?php echo Mapper::url('/public/css/main.css'); ?>" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="public/js/custom.js"></script>
+        <script src="<?php echo Mapper::url('/public/js/custom.js'); ?>"></script>
 
         <title>Office in a Box</title>
     </head>
