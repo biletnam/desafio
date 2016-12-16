@@ -37,7 +37,7 @@ Class UsuariosModel extends AppModel {
     }
 
     public function delete($model_id){
-        $delete = $this->db->prepare("delete from usuarios where id = :id");
+        $delete = $this->db->prepare("DELETE from usuarios where id = :id");
         $delete->execute(array(
             ':id' => $model_id,
         ));
@@ -49,15 +49,22 @@ Class UsuariosModel extends AppModel {
     }
 
     public function first($model_id){
-        $first = $this->db->prepare("select * from usuarios where id = :id");
+        $first = $this->db->prepare("SELECT * from usuarios where id = :id");
         $first->execute(array(
             ':id' => $model_id,
         ));
         return $first->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function firstByUsername($username){
+        $first = $this->db->prepare("SELECT * from usuarios where username = :username");
+        $first->bindValue(':username', trim($username), PDO::PARAM_STR);
+        $first->execute();
+        return $first->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function all(){
-        $all = $this->db->query('select * from usuarios order by username asc');
+        $all = $this->db->query('SELECT * from usuarios order by username asc');
 
         $return = array();
         while($usuario = $all->fetch(PDO::FETCH_ASSOC)){
