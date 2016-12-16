@@ -1,8 +1,12 @@
 <?php
 
-$crud_type = 'Inserir Usuário'
+$crud_type = 'Inserir Usuário';
+if(!empty($usuario)){
+    $crud_type = 'Editar Usuário';
+}
+
 ?>
-<h1>Gestão de Usuários</h1>
+<h3>Gestão de Usuários</h3>
 
 <div><strong><?php echo $crud_type; ?></strong></div>
 
