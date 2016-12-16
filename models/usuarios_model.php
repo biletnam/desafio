@@ -17,7 +17,23 @@ Class UsuariosModel extends AppModel {
     }
 
     public function update($model_id, $data){
+        try{
+            $update = $this->db->prepare('UPDATE usuarios set username = :username where id = :id');
+            $update->bindValue(':id', $model_id, PDO::PARAM_INT);
+            $update->bindValue(':username', $data['username'], PDO::PARAM_STR);
+            $update->execute();
 
+            if(!empty($data['passwd'])){
+                $passwd = $this->db->prepare('UPDATE usuarios set passwd = :passwd where id = :id');
+                $passwd->bindValue(':passwd', $data['passwd'], PDO::PARAM_STR);
+                $passwd->execute();
+            }
+
+        } catch(PDOException $e) {
+            echo 'Erro: ' . $e->getMessage();
+        }
+
+        return $this->db->lastInsertId() >0;
     }
 
     public function delete($model_id){

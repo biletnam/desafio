@@ -47,7 +47,7 @@ Class UsuariosController extends AppController {
                 $this->vars(array('message' => 'Ocorreu erro ao cadastrar usuário.'));
             }
 
-            $this->redirect('/');
+            $this->redirect('/usuarios');
         }
 
         $this->vars(array(
