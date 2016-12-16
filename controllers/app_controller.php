@@ -80,6 +80,13 @@ Class AppController {
         }
     }
 
+    public function redirect($url){
+        if(!headers_sent() && !empty($url)){
+            header("Location: " . Mapper::url($url, true));
+        }
+        exit;
+    }
+
 
     public function pagina_nao_existe(){
     }
