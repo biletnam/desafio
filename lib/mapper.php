@@ -86,6 +86,9 @@ class Mapper {
         }
         return $url;
     }
+    public function getPrefixes(){
+        return array('admin','api');
+    }
     /**
      *  Conecta uma URL a uma rota do framework.
      *
@@ -145,7 +148,7 @@ class Mapper {
     public static function parse($url = null, $debug=false) {
         $here = self::normalize(is_null($url) ? self::here() : $url);
         $url = self::getRoute($here);
-        $prefixes = join("|", array('admin|api'));
+        $prefixes = join("|", self::getPrefixes());
         
         $path = array();
         $parts = array("here", "prefix", "controller", "action", "id", "extension", "params", "queryString");
@@ -172,7 +175,7 @@ class Mapper {
         }
 
         $path["here"] = $here;
-        if(empty($path["controller"])) $path["controller"] = self::getRoot();
+        if(empty($path["controller"])) $path["controller"] = 'home';
         if(empty($path["action"])) $path["action"] = "index";
         if($filtered = self::filterAction($path["action"])){
             $path["prefix"] = $filtered["prefix"];

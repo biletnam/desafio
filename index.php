@@ -1,6 +1,7 @@
 <?php
 
 define(ROOT, dirname(__FILE__));
+define(BASE_URL, 'http://'.$_SERVER["HTTP_HOST"]);
 
 require ROOT.'/lib/config.php';
 require ROOT.'/lib/utils.php';
