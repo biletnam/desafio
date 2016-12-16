@@ -1,14 +1,14 @@
 <?php
 
 Class AppController {
-    protected $action; // nome da action usado para renderizar view e suas variáveis
-    protected $vars = array(); // variáveis enviadas à view
     protected $get = array(); // variável GET do servidor
     protected $post = array(); // variável POST do formulário
+    protected $action; // nome da action usado para renderizar view e suas variáveis
+    protected $vars = array(); // variáveis enviadas à view
 
     public function __construct(){
         // armazena post e get
-        $this->get = sanitizeQuotes($_GET);
+        $this->get = Mapper::parse();
         $this->post = sanitizeQuotes($_POST);
     }
 

@@ -87,61 +87,6 @@ class Mapper {
         return $url;
     }
     /**
-     *  Define o controller padrão da aplicação.
-     *
-     *  @param string $controller Controller a ser definido como padrão
-     *  @return true
-     */
-    public static function root($controller) {
-        $self = self::getInstance();
-        $self->root = $controller;
-        return true;
-    }
-    /**
-     *  Getter para Mapper::root
-     *
-     *  @return string Controller padrão da aplicação
-     */
-    public static function getRoot() {
-        $self = self::getInstance();
-        return $self->root;
-    }
-    /**
-     *  Habilita um prefixo.
-     *
-     *  @param string $prefix Prefixo a ser habilitado
-     *  @return true
-     */
-    public static function prefix($prefix) {
-        $self = self::getInstance();
-        if(is_array($prefix)) $prefixes = $prefix;
-        else $prefixes = func_get_args();
-        foreach($prefixes as $prefix){
-            $self->prefixes []= $prefix;
-        }
-        return true;
-    }
-    /**
-     *  Remove um prefixo da lista.
-     *
-     *  @param string $prefix Prefixo a ser removido
-     *  @return true
-     */
-    public static function unsetPrefix($prefix) {
-        $self = self::getInstance();
-        unset($self->prefixes[$prefix]);
-        return true;
-    }
-    /**
-     *  Retorna uma lista com todos os prefixos definidos pela aplicação.
-     *
-     *  @return array Lista de prefixos
-     */
-    public static function getPrefixes() {
-        $self = self::getInstance();
-        return $self->prefixes;
-    }
-    /**
      *  Conecta uma URL a uma rota do framework.
      *
      *  @param string $url URL a ser conectada
@@ -158,18 +103,6 @@ class Mapper {
             $url = self::normalize($url);
             $self->routes[$url] = rtrim($route, "/");
         }
-        return true;
-    }
-    /**
-     *  Desconecta uma URL de uma rota
-     *
-     *  @param string $url URL a ser desconectada
-     *  @return true
-     */
-    public static function disconnect($url) {
-        $self = self::getInstance();
-        $url = rtrim($url, "/");
-        unset($self->routes[$url]);
         return true;
     }
     /**
@@ -212,11 +145,10 @@ class Mapper {
     public static function parse($url = null, $debug=false) {
         $here = self::normalize(is_null($url) ? self::here() : $url);
         $url = self::getRoute($here);
-        $prefixes = join("|", self::getPrefixes());
+        $prefixes = join("|", array('admin|api'));
         
         $path = array();
         $parts = array("here", "prefix", "controller", "action", "id", "extension", "params", "queryString");
-        // preg_match("/^\/(?:({$prefixes})(?:\/|(?!\w)))?(?:([a-z_-]*)\/?)?(?:([a-z_-]*)\/?)?(?:(\d*))?(?:\.([\w]+))?(?:\/?([^?]+))?(?:\?(.*))?/i", $url, $reg);
         preg_match("/^\/(?:({$prefixes})(?:\/|(?!\w)))?(?:([a-z0-9_-]*)\/?)?(?:([a-z0-9_-]*)\/?)?(?:(\d*))?(?:\.([\w]+))?(?:\/?([^?]+))?(?:\?(.*))?/i", $url, $reg);
         foreach($parts as $k => $key){
             $path[$key] = isset($reg[$k]) ? $reg[$k] : null;
