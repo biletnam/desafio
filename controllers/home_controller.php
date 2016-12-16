@@ -22,16 +22,17 @@ Class HomeController extends AppController {
     }
 
     public function crud_usuario(){
-        $usuarios_id = $this->get['usuarios_id'];
+        $usuarios_id = $this->get['id'];
 
         if(!empty($this->post)){
+            if(!empty($this->post['delete_usuarios_id'])){
+                $this->UsuariosModel->delete($this->post['delete_usuarios_id']);
+                echo json_decode(array('data'=>true));
+            } else
+
             if(empty($usuarios_id)){
                 $this->UsuariosModel->insert($this->post);
             } else 
-
-            if(!empty($this->post['delete_usuarios_id'])){
-                $this->UsuariosModel->delete($this->post['delete_usuarios_id']);
-            } else
 
             if(!empty($usuarios_id)){
                 $this->UsuariosModel->update($usuarios_id, $this->post);
@@ -45,10 +46,16 @@ Class HomeController extends AppController {
                 // falha
                 $this->vars(array('message' => 'Ocorreu erro ao cadastrar usuário.'));
             }
+
+            $this->redirect('/');
         }
 
         $this->vars(array(
             'usuario' => $this->UsuariosModel->first($usuarios_id),
         ));
+    }
+
+    public function debug(){
+        // $this->UsuariosModel->delete(1);
     }
 }
