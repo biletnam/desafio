@@ -1,7 +1,5 @@
 <?php
 
-
-
 function sanitizeQuotes($conteudo){
     if(is_array($conteudo)){
         // From PHP Manual: http://www.php.net/manual/en/function.get-magic-quotes-gpc.php#97783
@@ -20,4 +18,12 @@ function sanitizeQuotes($conteudo){
         $conteudo = stripslashes($conteudo);
     }
     return $conteudo;
+}
+
+function debug(){
+    $argumentos = func_get_args();
+    ob_start();
+    call_user_func_array('var_dump', $argumentos);
+    $debug = ob_get_clean();
+    echo '<pre>'.$debug.'</pre>';
 }
