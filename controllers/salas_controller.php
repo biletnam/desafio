@@ -47,7 +47,7 @@ Class SalasController extends AppController {
                 $this->vars(array('message' => 'Ocorreu erro ao cadastrar sala.'));
             }
 
-            $this->redirect('/');
+            $this->redirect('/salas');
         }
 
         $this->vars(array(
