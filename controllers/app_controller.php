@@ -13,6 +13,15 @@ Class AppController {
     }
 
 
+    public function run(){
+        $this->filter();
+
+        $action = !empty($this->get['action']) ? $this->get['action'] : 'index';
+        $this->action($action);
+
+        $this->render();
+    }
+
     /**
      * Permissão de acessos.
      */
@@ -40,7 +49,12 @@ Class AppController {
 
     protected function action($action){
         $this->action = $action;
-        $this->{$action}(array());
+
+        if(!method_exists($this, $action)){
+            $this->action = 'pagina_nao_existe';
+        }
+
+        $this->{$this->action}(array());
     }
 
     public function vars($variables){
@@ -64,5 +78,9 @@ Class AppController {
                 $this->{$model} = new $model();
             }
         }
+    }
+
+
+    public function pagina_nao_existe(){
     }
 }
