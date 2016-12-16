@@ -6,10 +6,10 @@ Class AppController {
     protected $action; // nome da action usado para renderizar view e suas variáveis
     protected $vars = array(); // variáveis enviadas à view
 
-    public function __construct(){
+    public function __construct($get = array(), $post = array()){
         // armazena post e get
-        $this->get = Mapper::parse();
-        $this->post = sanitizeQuotes($_POST);
+        $this->get = empty($get) ? Mapper::parse() : $get;
+        $this->post = empty($post) ? sanitizeQuotes($_POST) : $post;
     }
 
 
@@ -26,7 +26,7 @@ Class AppController {
             $this->render();
         } else {
             require_once $filename_controller;
-            $Controller = new $controller();
+            $Controller = new $controller($this->get, $this->post);
             $Controller->action($this->action);
             $Controller->filter();
             $Controller->{$this->action}();
