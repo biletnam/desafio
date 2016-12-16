@@ -25,6 +25,10 @@ Class HomeController extends AppController {
             }
         }
     }
+
+    public function logout(){
+        $this->LoginModel->logout();
+        $this->redirect('/');
     }
 
     public function debug(){
