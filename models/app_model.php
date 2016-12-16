@@ -2,7 +2,7 @@
 
 require ROOT.'/config/database.php';
 
-Class AppModel {
+Class AppModel extends Object {
     protected $db; // objeto PDO
 
     public function __construct(){

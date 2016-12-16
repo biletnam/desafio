@@ -1,6 +1,6 @@
 <?php
 
-Class AppController {
+Class AppController extends Object {
     protected $get = array(); // variável GET do servidor
     protected $post = array(); // variável POST do formulário
     protected $action; // nome da action usado para renderizar view e suas variáveis
@@ -74,21 +74,6 @@ Class AppController {
         if(!empty($variables)){
             foreach($variables as $name => $value){
                 $this->vars[$name] = $value;
-            }
-        }
-    }
-
-    public function loadModel($model, $file=null){
-        if(is_array($model)){
-            if(!empty($model)){
-                foreach($model as $class => $file){
-                    $this->loadModel($class, $file);
-                }
-            }
-        } else {
-            if(!isset($this->{$model})){
-                require_once ROOT.'/models/'.$file.'.php';
-                $this->{$model} = new $model();
             }
         }
     }

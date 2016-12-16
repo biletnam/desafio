@@ -7,6 +7,7 @@ require ROOT.'/lib/config.php';
 require ROOT.'/lib/utils.php';
 require ROOT.'/lib/inflector.php';
 require ROOT.'/lib/mapper.php';
+require ROOT.'/lib/object.php';
 require ROOT.'/models/app_model.php';
 require ROOT.'/controllers/app_controller.php';
 require ROOT.'/controllers/home_controller.php';
