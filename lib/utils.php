@@ -27,3 +27,14 @@ function debug(){
     $debug = ob_get_clean();
     echo '<pre>'.$debug.'</pre>';
 }
+
+function str_zero($n,$casas,$inverso=false){
+    if( $inverso && is_numeric($n) && $n>0 ){
+        while( substr($n,0,1)=='0' ){
+            $n = substr($n,1);
+        }
+        return $n;
+    }
+    $result = str_pad($n, $casas, "0", STR_PAD_LEFT);
+    return $result;
+}

@@ -32,6 +32,5 @@ Class HomeController extends AppController {
     }
 
     public function debug(){
-        // $this->UsuariosModel->delete(1);
     }
 }
