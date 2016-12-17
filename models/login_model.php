@@ -6,10 +6,10 @@ Class LoginModel extends AppModel {
         $this->loadModel('UsuariosModel', 'usuarios_model');
 
         $user = $this->UsuariosModel->firstByUsername($auth['username']);
-        if(!empty($user) && $user['passwd'] == $auth['passwd']){
+        if(!empty($user) && $user['passwd'] == sha1($auth['passwd'])){
             $_SESSION['auth'] = array(
                 'username' => $auth['username'],
-                'passwd' => $auth['passwd'],
+                'passwd' => sha1($auth['passwd']),
             );
             return true;
         }
@@ -28,6 +28,11 @@ Class LoginModel extends AppModel {
         return !empty($user) && $user['passwd'] == $_SESSION['auth']['passwd'];
     }
 
+    public function user(){
+        $this->loadModel('UsuariosModel', 'usuarios_model');
+        return $this->UsuariosModel->firstByUsername($_SESSION['auth']['username']);
+    }
+
     public function logout(){
         $_SESSION['auth'] = array();
         $_SESSION['previousAction'] = '';
@@ -39,5 +44,9 @@ Class LoginModel extends AppModel {
 
     public function getPreviousAction(){
         return $_SESSION['previousAction'];
+    }
+
+    static public function username(){
+        return $_SESSION['auth']['username'];
     }
 }

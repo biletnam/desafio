@@ -7,7 +7,7 @@ Class UsuariosModel extends AppModel {
             $insert = $this->db->prepare('INSERT INTO usuarios (username, passwd) VALUES(:username, :passwd)');
             $insert->execute(array(
                 ':username' => $data['username'],
-                ':passwd' => $data['passwd'],
+                ':passwd' => sha1($data['passwd']),
             ));
         } catch(PDOException $e) {
             echo 'Erro: ' . $e->getMessage();
@@ -25,7 +25,8 @@ Class UsuariosModel extends AppModel {
 
             if(!empty($data['passwd'])){
                 $passwd = $this->db->prepare('UPDATE usuarios set passwd = :passwd where id = :id');
-                $passwd->bindValue(':passwd', $data['passwd'], PDO::PARAM_STR);
+                $passwd->bindValue(':id', $model_id, PDO::PARAM_INT);
+                $passwd->bindValue(':passwd', sha1($data['passwd']), PDO::PARAM_STR);
                 $passwd->execute();
             }
 
