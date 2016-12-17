@@ -5,7 +5,7 @@
         <link href="<?php echo Mapper::url('/public/css/main.css'); ?>" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/lodash/4.16.4/lodash.min.js"></script>
         <script src="https://bootswatch.com/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="<?php echo Mapper::url('/public/js/custom.js'); ?>"></script>
 
