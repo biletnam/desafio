@@ -1,14 +1,18 @@
 <?php
 
 
+$tabela = '';
 if(!empty($salas)){
 
-    $tabela = '<p>&nbsp;
-    <table border=1 class="table table-striped table-hover">
-        <colgroup width="10%">
-        <colgroup width="50%">';
+    // verifica se há erros
+    if(!empty($erro_message)){
+        $tabela = '<div class="alert alert-dismissible alert-danger" style="margin-top: 20">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Erro:</strong> '.$erro_message.'
+        </div>';
+    }
 
-    $tabela .= '<thead><tr><th>&nbsp;</th>';
+    $tabela .= '<p>&nbsp; <table border=1 class="table table-striped table-hover"><thead><tr><th>&nbsp;</th>';
 
     foreach($salas as $salas_id => $sala){
         $tabela .= '<th>'.$sala['nome'].'</th>';
@@ -19,15 +23,15 @@ if(!empty($salas)){
     for($hora = 8; $hora <=19; $hora++){
 
         $hora_grade = str_zero($hora, 2).':00';
-        $tabela .= '<tr><td align="center">'.$hora_grade.'</td>';
+        $tabela .= '<tr><td width="10%" align="center">'.$hora_grade.'</td>';
 
         if(!empty($salas)){
             foreach($salas as $salas_id => $sala){
                 $reserva = $reservas[$hora_grade][$salas_id];
                 if(!empty($reserva)){
-                    $tabela .= '<td class="reservado" data-id="'.$reserva['id'].'"> RESERVADO para '.$reserva['usuario']['username'].' </td>';
+                    $tabela .= '<td width="120" class="reservado" data-id="'.$reserva['id'].'" data-hora="'.$hora_grade.'" data-sala="'.$salas_id.'"> RESERVADO para '.$reserva['usuario']['username'].' </td>';
                 } else {
-                    $tabela .= '<td class="livre" data-hora="'.$hora.'" data-sala="'.$salas_id.'"> &nbsp;</td>';
+                    $tabela .= '<td width="120" class="livre" data-hora="'.$hora.'" data-sala="'.$salas_id.'"> &nbsp;</td>';
                 }
             }
         }
@@ -47,6 +51,7 @@ if(!empty($salas)){
 <?php echo $tabela; ?>
 
 <script type='text/javascript'>
+const user = <?php echo json_encode($usuario_logado['id']); ?>;
 var reservas = <?php echo json_encode($reservas); ?>;
 $(function (){
     $('td.livre').click(function (){
@@ -54,6 +59,13 @@ $(function (){
     });
 
     $('td.reservado').click(function (){
+        // var reserva = reservas[$(this).attr('data-hora')][$(this).attr('data-sala')];
+
+        // if(user != reserva.usuaros_id){
+        //     alert('Você não tem perissão para excluir esta reserva.');
+        //     return false;
+        // }
+
         if(confirm('Tem certeza de que deseja excluir reserva de sala?')){
             window.location.href = "<?php echo Mapper::url('/reservas/crud'); ?>/" + $(this).attr('data-id');
         }

@@ -20,10 +20,11 @@ Class ReservasController extends AppController {
     public function lista_reservas(){
 
         $this->vars(array(
+            'usuario_logado' => $this->LoginModel->user(),
             'salas' => $this->SalasModel->all(),
             'reservas' => $this->ReservasModel->all(),
+            'erro_message' => $this->get['named']['erro'] == 1? 'você não tem permissão para excluir esta reserva' : '',
         ));
-// die(debug($this->vars['reservas']));
     }
 
     public function crud(){
@@ -33,7 +34,15 @@ Class ReservasController extends AppController {
         $usuario = $this->LoginModel->user();
 
         if(!empty($reservas_id)){
-            $this->ReservasModel->delete($reservas_id);
+            // verifica se usuário logado tem permissão para excluir
+            $usuario_logado = $this->LoginModel->user();
+            $reserva = $this->ReservasModel->first($reservas_id);
+            if($usuario_logado['id'] == $reserva['usuarios_id']){
+                $this->ReservasModel->delete($reservas_id);
+            } else {
+                $this->redirect('/reservas?erro=1');
+            }
+            
         } else
 
         if(empty($reservas_id)){
