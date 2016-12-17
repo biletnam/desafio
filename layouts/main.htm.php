@@ -28,8 +28,10 @@
                         <li class="<?php echo $get['controller'] == 'home'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/'); ?>">Home</a></li>
                         <li class="<?php echo $get['controller'] == 'usuarios'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/usuarios'); ?>">Usuários</a></li>
                         <li class="<?php echo $get['controller'] == 'salas'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/salas'); ?>">Salas</a></li>
+                        <li class="<?php echo $get['controller'] == 'reservas'? 'active' : ''; ?>"><a href="<?php echo Mapper::url('/reservas'); ?>">Reservas de Salas</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a class="btn btn-primary disabled" href="javascript:void(0);">Bem-vindo <?php echo LoginModel::username(); ?>!</a>
                         <li><a href="<?php echo Mapper::url('/home/logout'); ?>">Logout</a></li>
                     </ul>
                 </div>
