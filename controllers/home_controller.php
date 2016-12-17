@@ -32,5 +32,7 @@ Class HomeController extends AppController {
     }
 
     public function debug(){
+        $this->loadModel('ReservasModel', 'reservas_model');
+        die(debug($this->ReservasModel->countBySalasId(2)));
     }
 }
