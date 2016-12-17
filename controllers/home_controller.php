@@ -33,6 +33,12 @@ Class HomeController extends AppController {
 
     public function debug(){
         $this->loadModel('ReservasModel', 'reservas_model');
-        die(debug($this->ReservasModel->countBySalasId(2)));
+        // die(debug(
+            // $this->ReservasModel->insert(5, '16:00', 11), // validação 1 
+            // $this->ReservasModel->insert(2, '10:00', 09), // validação 2 
+            // $this->ReservasModel->insert(2, '12:00', 11), // validação 3 
+            // $this->ReservasModel->insert(5, '15:00', 11), // ok
+            // $this->ReservasModel->getErrors()
+        // ));
     }
 }
