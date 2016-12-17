@@ -27,7 +27,7 @@ Class SalasController extends AppController {
         if(!empty($this->post)){
             if(!empty($this->post['delete_salas_id'])){
                 $this->SalasModel->delete($this->post['delete_salas_id']);
-                echo json_decode(array('data'=>true));
+                echo json_encode(array('data'=>true));
             } else
 
             if(empty($salas_id)){

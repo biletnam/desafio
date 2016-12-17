@@ -27,7 +27,7 @@ Class UsuariosController extends AppController {
         if(!empty($this->post)){
             if(!empty($this->post['delete_usuarios_id'])){
                 $this->UsuariosModel->delete($this->post['delete_usuarios_id']);
-                echo json_decode(array('data'=>true));
+                echo json_encode(array('data'=>true));
             } else
 
             if(empty($usuarios_id)){
