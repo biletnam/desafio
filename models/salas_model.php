@@ -34,11 +34,21 @@ Class SalasModel extends AppModel {
     }
 
     public function delete($model_id){
+        $this->loadModel('ReservasModel', 'reservas_model');
+
+        $excluiu = false;
+
+        if($this->ReservasModel->countBySalasId($model_id) >0){
+            $this->ReservasModel->deleteBySalasId($model_id);
+        }
+
         $delete = $this->db->prepare("DELETE from salas where id = :id");
         $delete->execute(array(
             ':id' => $model_id,
         ));
-        return $this->count($model_id) > 0;
+        $excluiu = $this->db->lastInsertId() > 0;
+
+        return $excluiu;
     }
 
     public function id(){

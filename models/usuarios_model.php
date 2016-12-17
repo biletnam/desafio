@@ -38,11 +38,21 @@ Class UsuariosModel extends AppModel {
     }
 
     public function delete($model_id){
+        $this->loadModel('ReservasModel', 'reservas_model');
+
+        $excluiu = false;
+
+        if($this->ReservasModel->countByUsuariosId($model_id) >0){
+            $this->ReservasModel->deleteByUsuariosId($model_id);
+        }
+
         $delete = $this->db->prepare("DELETE from usuarios where id = :id");
         $delete->execute(array(
             ':id' => $model_id,
         ));
-        return $this->count($model_id) > 0;
+        $excluiu = $this->db->lastInsertId() > 0;
+
+        return $excluiu;
     }
 
     public function id(){

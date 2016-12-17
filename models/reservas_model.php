@@ -40,6 +40,22 @@ Class ReservasModel extends AppModel {
         return $this->count($model_id) > 0;
     }
 
+    public function deleteByUsuariosId($usuarios_id){
+        $delete = $this->db->prepare("DELETE from reservas where usuarios_id = :usuarios_id");
+        $delete->execute(array(
+            ':usuarios_id' => $usuarios_id,
+        ));
+        return $this->db->lastInsertId() >0;
+    }
+
+    public function deleteBySalasId($salas_id){
+        $delete = $this->db->prepare("DELETE from reservas where salas_id = :salas_id");
+        $delete->execute(array(
+            ':salas_id' => $salas_id,
+        ));
+        return $this->db->lastInsertId() >0;
+    }
+
     public function id(){
         $this->db->lastInsertId();
     }
@@ -67,5 +83,21 @@ Class ReservasModel extends AppModel {
 
     public function count($model_id){
         $count = $this->first($model_id);
+    }
+
+    public function countByUsuariosId($usuarios_id){
+        $count = $this->db->prepare("SELECT count(*) from reservas where usuarios_id = :usuarios_id");
+        $count->execute(array(
+            ':usuarios_id' => $usuarios_id,
+        ));
+        return $count->fetchColumn();
+    }
+
+    public function countBySalasId($salas_id){
+        $count = $this->db->prepare("SELECT count(*) from reservas where salas_id = :salas_id");
+        $count->execute(array(
+            ':salas_id' => $salas_id,
+        ));
+        return $count->fetchColumn();
     }
 }
