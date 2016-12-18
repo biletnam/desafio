@@ -13,3 +13,6 @@ Tempo de desenvolvimento: 10,5h
   - user: bruno, senha: 1
   - user: amauri, senha: 1
 
+
+## Etapa 2
+- arquivo em /dump/etapa2.sql
