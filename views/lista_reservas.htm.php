@@ -65,15 +65,13 @@ $(function (){
                 }
             });
 
-            console.log(pode_reservar);
-
             if(!pode_reservar){
                 alert('Você não pode reservar outra sala no mesmo horário.');
                 return false;
-            } else {
-                window.location.href = "<?php echo Mapper::url('/reservas/crud/'); ?>?hora=" + $(this).attr('data-hora') + '&sala=' + $(this).attr('data-sala');
             }
         }
+
+        window.location.href = "<?php echo Mapper::url('/reservas/crud/'); ?>?hora=" + $(this).attr('data-hora') + '&sala=' + $(this).attr('data-sala');
     });
 
     $('td.reservado').click(function (){
